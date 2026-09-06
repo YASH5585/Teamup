@@ -1,47 +1,98 @@
-import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Container } from '../common/Container';
 import { Button } from '../common/Button';
 
 export function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [openedOnPathname, setOpenedOnPathname] = useState<string | null>(null);
+  const isMobileMenuOpen = openedOnPathname === location.pathname;
 
-  const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-    `text-sm font-medium transition-colors ${
-      isActive
-        ? 'text-[#007aff]'
-        : 'text-[#5f6368] hover:text-[#484848]'
-    }`;
+  // Track scroll position to apply subtle separation
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 12);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMobileMenuOpen) {
+        setOpenedOnPathname(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isMobileMenuOpen]);
+
+  const toggleMenu = useCallback(() => {
+    setOpenedOnPathname((curr) => (curr === location.pathname ? null : location.pathname));
+  }, [location.pathname]);
+
+  const closeMenu = useCallback(() => {
+    setOpenedOnPathname(null);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-[#f0f0f0] bg-[#fafafa]/90 backdrop-blur-md">
-      <Container size="lg">
-        <div className="flex h-16 items-center justify-between">
-          {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#007aff] text-white font-bold text-base shadow-sm">
-              T
-            </span>
-            <span className="text-lg font-bold tracking-tight text-[#484848]">
+    <header
+      className={`sticky top-0 z-40 w-full transition-all duration-200 ${
+        isScrolled
+          ? 'bg-[#fafafa]/85 backdrop-blur-md border-b border-[#f0f0f0] shadow-[0_2px_12px_rgba(0,0,0,0.03)]'
+          : 'bg-[#fafafa]/60 backdrop-blur-xs border-b border-transparent'
+      }`}
+    >
+      <Container size="default">
+        <div className="flex h-16 sm:h-18 items-center justify-between">
+          {/* Left: Wordmark / Logo */}
+          <Link
+            to="/"
+            className="group flex items-center gap-1 text-xl font-bold tracking-tight text-[#484848] rounded-lg px-1 py-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#007aff]"
+            aria-label="TeamUp Home"
+          >
+            <span>
               Team<span className="text-[#007aff]">Up</span>
             </span>
+            <span
+              className="h-1.5 w-1.5 rounded-full bg-[#007aff] transition-transform group-hover:scale-125"
+              aria-hidden="true"
+            />
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-6">
-            <NavLink to="/" end className={navLinkClasses}>
-              Home
-            </NavLink>
-            <NavLink to="/dashboard" className={navLinkClasses}>
-              Dashboard
-            </NavLink>
+          {/* Center/Right Navigation Links */}
+          <nav
+            className="hidden md:flex items-center gap-8"
+            aria-label="Primary navigation"
+          >
+            <a
+              href="/#competitions"
+              className="text-sm font-medium text-[#5f6368] hover:text-[#484848] transition-colors rounded-md px-1.5 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#007aff]"
+            >
+              Competitions
+            </a>
+            <a
+              href="/#how-it-works"
+              className="text-sm font-medium text-[#5f6368] hover:text-[#484848] transition-colors rounded-md px-1.5 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#007aff]"
+            >
+              How it works
+            </a>
           </nav>
 
-          {/* Desktop Actions */}
+          {/* Right Actions: Log in + Get Started */}
           <div className="hidden md:flex items-center gap-3">
             <Link to="/login">
-              <Button variant="ghost" size="sm">
-                Sign In
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-sm font-medium text-[#5f6368] hover:text-[#484848] hover:bg-[#f0f0f0]"
+              >
+                Log in
               </Button>
             </Link>
             <Link to="/register">
@@ -51,21 +102,44 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Toggle Button */}
           <div className="flex md:hidden">
             <button
               type="button"
-              className="p-2 rounded-lg text-[#5f6368] hover:bg-[#f0f0f0] focus:outline-none focus:ring-2 focus:ring-[#007aff]"
-              aria-label="Toggle navigation menu"
-              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              className="inline-flex items-center justify-center p-2 rounded-xl text-[#5f6368] hover:text-[#484848] hover:bg-[#f0f0f0] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#007aff]"
+              aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-nav-menu"
+              onClick={toggleMenu}
             >
-              {mobileMenuOpen ? (
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              {isMobileMenuOpen ? (
+                <svg
+                  className="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
                 </svg>
               ) : (
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <svg
+                  className="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <line x1="4" y1="7" x2="20" y2="7" />
+                  <line x1="4" y1="12" x2="20" y2="12" />
+                  <line x1="4" y1="17" x2="20" y2="17" />
                 </svg>
               )}
             </button>
@@ -73,36 +147,42 @@ export function Navbar() {
         </div>
 
         {/* Mobile Dropdown Menu */}
-        {mobileMenuOpen && (
-          <div className="border-t border-[#f0f0f0] py-4 md:hidden">
-            <div className="flex flex-col gap-3">
-              <NavLink
-                to="/"
-                end
-                className={navLinkClasses}
-                onClick={() => setMobileMenuOpen(false)}
+        {isMobileMenuOpen && (
+          <div
+            id="mobile-nav-menu"
+            className="md:hidden border-t border-[#f0f0f0] py-4 bg-[#fafafa]/95 backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-150"
+          >
+            <nav
+              className="flex flex-col gap-1 pb-4"
+              aria-label="Mobile navigation"
+            >
+              <a
+                href="/#competitions"
+                className="px-3 py-2 text-sm font-medium text-[#5f6368] hover:text-[#484848] hover:bg-[#f0f0f0] rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#007aff]"
+                onClick={closeMenu}
               >
-                Home
-              </NavLink>
-              <NavLink
-                to="/dashboard"
-                className={navLinkClasses}
-                onClick={() => setMobileMenuOpen(false)}
+                Competitions
+              </a>
+              <a
+                href="/#how-it-works"
+                className="px-3 py-2 text-sm font-medium text-[#5f6368] hover:text-[#484848] hover:bg-[#f0f0f0] rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#007aff]"
+                onClick={closeMenu}
               >
-                Dashboard
-              </NavLink>
-              <div className="pt-2 flex flex-col gap-2">
-                <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant="outline" size="sm" fullWidth>
-                    Sign In
-                  </Button>
-                </Link>
-                <Link to="/register" onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant="primary" size="sm" fullWidth>
-                    Get Started
-                  </Button>
-                </Link>
-              </div>
+                How it works
+              </a>
+            </nav>
+
+            <div className="border-t border-[#f0f0f0] pt-4 flex flex-col gap-2.5">
+              <Link to="/login" onClick={closeMenu}>
+                <Button variant="outline" size="sm" fullWidth>
+                  Log in
+                </Button>
+              </Link>
+              <Link to="/register" onClick={closeMenu}>
+                <Button variant="primary" size="sm" fullWidth>
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
         )}
@@ -110,4 +190,3 @@ export function Navbar() {
     </header>
   );
 }
-
