@@ -1,72 +1,89 @@
 import { Link } from 'react-router-dom';
-import { Container } from '../../components/common/Container';
-import { PageWrapper } from '../../components/common/PageWrapper';
-import { Button } from '../../components/common/Button';
+import { Card } from '../../components/common/Card';
+import { Badge } from '../../components/common/Badge';
 
 export function DashboardPage() {
   return (
-    <PageWrapper>
-      <Container size="lg">
-        <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-[#f0f0f0]">
-            <div>
-              <h1 className="text-2xl font-bold text-[#484848]">Student Dashboard</h1>
-              <p className="text-sm text-[#5f6368] mt-0.5">
-                Overview of your teams, hackathons, and teammate recommendations.
-              </p>
-            </div>
-            <div>
-              <Link to="/">
-                <Button variant="outline" size="sm">
-                  Back to Home
-                </Button>
-              </Link>
-            </div>
+    <div className="space-y-6">
+      {/* Page Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-5 border-b border-[#f0f0f0]">
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#484848]">
+              Student Dashboard
+            </h1>
+            <Badge variant="accent" className="text-xs">
+              Phase 3.1
+            </Badge>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="rounded-2xl border border-[#f0f0f0] bg-white p-6 shadow-sm space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-[#007aff]/10 flex items-center justify-center text-[#007aff] font-bold">
-                01
-              </div>
-              <h2 className="text-lg font-semibold text-[#484848]">My Profile</h2>
-              <p className="text-sm text-[#5f6368]">
-                Showcase your skills, proficiencies, preferred roles, and projects.
-              </p>
-              <div className="pt-2 text-xs font-medium text-[#787878]">
-                Profile creation incoming in Phase 5
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-[#f0f0f0] bg-white p-6 shadow-sm space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-[#007aff]/10 flex items-center justify-center text-[#007aff] font-bold">
-                02
-              </div>
-              <h2 className="text-lg font-semibold text-[#484848]">Active Teams</h2>
-              <p className="text-sm text-[#5f6368]">
-                Manage competition teams and inspect missing skills.
-              </p>
-              <div className="pt-2 text-xs font-medium text-[#787878]">
-                Team management incoming in Phase 6
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-[#f0f0f0] bg-white p-6 shadow-sm space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-[#007aff]/10 flex items-center justify-center text-[#007aff] font-bold">
-                03
-              </div>
-              <h2 className="text-lg font-semibold text-[#484848]">Matching Engine</h2>
-              <p className="text-sm text-[#5f6368]">
-                Discover suitable teammates with rule-based compatibility scoring.
-              </p>
-              <div className="pt-2 text-xs font-medium text-[#787878]">
-                Matching engine incoming in Phase 7
-              </div>
-            </div>
-          </div>
+          <p className="text-sm text-[#5f6368]">
+            Your TeamUp workspace will appear here.
+          </p>
         </div>
-      </Container>
-    </PageWrapper>
+
+        <div className="flex items-center gap-2">
+          <Link
+            to="/competitions"
+            className="inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold bg-[#007aff] text-white hover:bg-[#0066d6] transition-colors shadow-sm"
+          >
+            Browse Competitions
+          </Link>
+        </div>
+      </div>
+
+      {/* Temporary Workspace Placeholder Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <Card variant="white" radius="large" className="p-6 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-[#007aff] uppercase tracking-wider">
+              Workspace
+            </span>
+            <Badge variant="outline" className="text-[11px]">
+              Coming soon
+            </Badge>
+          </div>
+          <h2 className="text-lg font-bold text-[#484848]">Active Squads</h2>
+          <p className="text-sm text-[#5f6368]">
+            Formed teams, roster roles, and missing skill analysis.
+          </p>
+        </Card>
+
+        <Card variant="white" radius="large" className="p-6 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-[#007aff] uppercase tracking-wider">
+              Discovery
+            </span>
+            <Badge variant="outline" className="text-[11px]">
+              Coming soon
+            </Badge>
+          </div>
+          <h2 className="text-lg font-bold text-[#484848]">Matches &amp; Invites</h2>
+          <p className="text-sm text-[#5f6368]">
+            Personalized recommendations based on complementary skills.
+          </p>
+        </Card>
+
+        <Card variant="white" radius="large" className="p-6 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-[#007aff] uppercase tracking-wider">
+              Verification
+            </span>
+            <Badge variant="outline" className="text-[11px]">
+              Coming soon
+            </Badge>
+          </div>
+          <h2 className="text-lg font-bold text-[#484848]">Profile Inventory</h2>
+          <p className="text-sm text-[#5f6368]">
+            Verified university credentials, GitHub links, and past projects.
+          </p>
+        </Card>
+      </div>
+
+      {/* Note Callout */}
+      <div className="p-4 rounded-2xl bg-white border border-[#f0f0f0] text-xs text-[#787878] flex items-center justify-between">
+        <span>Application shell and navigation initialized. Functional capabilities will be connected in subsequent phases.</span>
+        <span className="font-semibold text-[#007aff]">Phase 3.1</span>
+      </div>
+    </div>
   );
 }
-
