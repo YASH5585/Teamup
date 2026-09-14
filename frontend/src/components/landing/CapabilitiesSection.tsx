@@ -57,11 +57,11 @@ export function CapabilitiesSection() {
       preview: (
         <div className="pt-4 p-3 rounded-2xl bg-[#fafafa] border border-[#f0f0f0] space-y-2">
           <div className="flex items-center justify-between text-xs font-semibold">
-            <span className="text-[#484848]">Team Compatibility</span>
-            <span className="text-[#007aff]">92% Match</span>
+            <span className="text-[#484848]">Compatibility Fit (Illustrative)</span>
+            <span className="text-[#007aff]">High Compatibility</span>
           </div>
           <div className="w-full bg-[#f0f0f0] rounded-full h-1.5 overflow-hidden">
-            <div className="bg-[#007aff] h-1.5 rounded-full w-[92%]" />
+            <div className="bg-[#007aff] h-1.5 rounded-full w-[90%]" />
           </div>
           <p className="text-[11px] text-[#787878]">
             Full coverage on missing database & API requirements
@@ -97,8 +97,9 @@ export function CapabilitiesSection() {
 
   return (
     <section
+      id="competitions"
       aria-labelledby="capabilities-heading"
-      className="w-full pb-16 sm:pb-24 lg:pb-32"
+      className="w-full pb-16 sm:pb-24 lg:pb-32 scroll-mt-20"
     >
       <Container size="default">
         {/* Section Header */}

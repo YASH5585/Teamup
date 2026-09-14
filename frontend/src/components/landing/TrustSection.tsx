@@ -78,8 +78,9 @@ export function TrustSection() {
 
   return (
     <section
+      id="about"
       aria-labelledby="trust-heading"
-      className="w-full pb-16 sm:pb-24 lg:pb-32"
+      className="w-full pb-16 sm:pb-24 lg:pb-32 scroll-mt-20"
     >
       <Container size="default">
         <div className="flex flex-col items-center text-center space-y-4 mb-12 sm:mb-16">

@@ -5,8 +5,9 @@ import { Badge } from '../common/Badge';
 export function FeatureValueSection() {
   return (
     <section
+      id="how-it-works"
       aria-labelledby="value-stories-heading"
-      className="w-full pb-20 sm:pb-28 lg:pb-36"
+      className="w-full pb-20 sm:pb-28 lg:pb-36 scroll-mt-20"
     >
       <Container size="default">
         {/* Section Header */}
@@ -80,7 +81,7 @@ export function FeatureValueSection() {
               <Card
                 variant="white"
                 radius="large"
-                className="p-6 sm:p-8 space-y-5 border-[#e8e8e8]"
+                className="p-5 sm:p-8 space-y-5 border-[#e8e8e8]"
               >
                 {/* Roster Header */}
                 <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#f0f0f0]">
@@ -97,53 +98,53 @@ export function FeatureValueSection() {
                 <div className="space-y-3">
                   {/* Member 1 */}
                   <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#fafafa] border border-[#f0f0f0]">
-                    <div className="flex items-center gap-3">
-                      <div className="h-9 w-9 rounded-full bg-[#f0f0f0] border border-[#e0e0e0] flex items-center justify-center text-xs font-bold text-[#484848]">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="h-9 w-9 rounded-full bg-[#f0f0f0] border border-[#e0e0e0] flex items-center justify-center text-xs font-bold text-[#484848] shrink-0">
                         TM
                       </div>
-                      <div>
-                        <div className="flex items-center gap-2">
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
                           <p className="text-sm font-semibold text-[#484848]">Team Lead &amp; Frontend</p>
-                          <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#eef5fc] text-[#007aff] font-medium">Confirmed</span>
+                          <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#eef5fc] text-[#007aff] font-medium shrink-0">Confirmed</span>
                         </div>
                         <p className="text-xs text-[#787878]">React &bull; TypeScript &bull; UI/UX</p>
                       </div>
                     </div>
-                    <span className="text-xs font-medium text-[#5f6368] hidden sm:inline">15 hrs/wk</span>
+                    <span className="text-xs font-medium text-[#5f6368] hidden sm:inline shrink-0 ml-2">15 hrs/wk</span>
                   </div>
 
                   {/* Member 2 */}
                   <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#fafafa] border border-[#f0f0f0]">
-                    <div className="flex items-center gap-3">
-                      <div className="h-9 w-9 rounded-full bg-[#f0f0f0] border border-[#e0e0e0] flex items-center justify-center text-xs font-bold text-[#484848]">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="h-9 w-9 rounded-full bg-[#f0f0f0] border border-[#e0e0e0] flex items-center justify-center text-xs font-bold text-[#484848] shrink-0">
                         CV
                       </div>
-                      <div>
-                        <div className="flex items-center gap-2">
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
                           <p className="text-sm font-semibold text-[#484848]">Computer Vision Engineer</p>
-                          <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#eef5fc] text-[#007aff] font-medium">Confirmed</span>
+                          <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#eef5fc] text-[#007aff] font-medium shrink-0">Confirmed</span>
                         </div>
                         <p className="text-xs text-[#787878]">PyTorch &bull; OpenCV &bull; Python</p>
                       </div>
                     </div>
-                    <span className="text-xs font-medium text-[#5f6368] hidden sm:inline">20 hrs/wk</span>
+                    <span className="text-xs font-medium text-[#5f6368] hidden sm:inline shrink-0 ml-2">20 hrs/wk</span>
                   </div>
 
                   {/* Member 3 */}
                   <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#fafafa] border border-[#f0f0f0]">
-                    <div className="flex items-center gap-3">
-                      <div className="h-9 w-9 rounded-full bg-[#f0f0f0] border border-[#e0e0e0] flex items-center justify-center text-xs font-bold text-[#484848]">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="h-9 w-9 rounded-full bg-[#f0f0f0] border border-[#e0e0e0] flex items-center justify-center text-xs font-bold text-[#484848] shrink-0">
                         EM
                       </div>
-                      <div>
-                        <div className="flex items-center gap-2">
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
                           <p className="text-sm font-semibold text-[#484848]">Embedded Systems</p>
-                          <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#eef5fc] text-[#007aff] font-medium">Confirmed</span>
+                          <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#eef5fc] text-[#007aff] font-medium shrink-0">Confirmed</span>
                         </div>
                         <p className="text-xs text-[#787878]">C++ &bull; ROS2 &bull; Microcontrollers</p>
                       </div>
                     </div>
-                    <span className="text-xs font-medium text-[#5f6368] hidden sm:inline">15 hrs/wk</span>
+                    <span className="text-xs font-medium text-[#5f6368] hidden sm:inline shrink-0 ml-2">15 hrs/wk</span>
                   </div>
 
                   {/* Unfilled Slot (Visible Missing Piece) */}
@@ -175,7 +176,7 @@ export function FeatureValueSection() {
               <Card
                 variant="white"
                 radius="large"
-                className="p-6 sm:p-8 space-y-5 border-[#e8e8e8]"
+                className="p-5 sm:p-8 space-y-5 border-[#e8e8e8]"
               >
                 {/* Search Filter Cue */}
                 <div className="p-4 rounded-2xl bg-[#fafafa] border border-[#f0f0f0] space-y-2.5">
@@ -353,7 +354,7 @@ export function FeatureValueSection() {
               <Card
                 variant="white"
                 radius="large"
-                className="p-6 sm:p-8 space-y-5 border-[#e8e8e8]"
+                className="p-5 sm:p-8 space-y-5 border-[#e8e8e8]"
               >
                 {/* Match Evaluation Header */}
                 <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#f0f0f0]">

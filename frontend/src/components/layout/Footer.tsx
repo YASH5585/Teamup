@@ -4,7 +4,8 @@ import { Container } from '../common/Container';
 export function Footer() {
   return (
     <footer
-      className="border-t border-[#f0f0f0] bg-[#fafafa] pt-14 pb-12 sm:pt-18 sm:pb-14"
+      id="contact"
+      className="border-t border-[#f0f0f0] bg-[#fafafa] pt-14 pb-12 sm:pt-18 sm:pb-14 scroll-mt-20"
       aria-labelledby="footer-brand"
     >
       <Container size="default">
